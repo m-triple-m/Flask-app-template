@@ -1,0 +1,114 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+
+<style>
+    .col-me{
+        background: linear-gradient(rgba(4, 6, 110, 0.253), rgba(85, 0, 93, 0.301)),
+        url('static/sign-top.jpg');
+        background-size:cover;
+        background-position: right;
+    }
+
+    .main-card{
+        margin-top: 8rem;
+        border: 0px;
+    }
+    body{
+        background-image: url('static/bg.jpg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+
+{% endblock %}
+
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-8" >
+            <div class="card shadow-lg main-card">
+                <div class="">
+                    <div class="row">
+
+                        <div class="col-md-7 col-me" style="background-color: rgb(42, 20, 87);">
+                                
+                        </div>
+                        <div class="col-md-5" style="height: 40rem;padding: 4rem;">
+                            <h1 class="text-center">Sign Up</h1>
+                            <hr>
+
+                            <label class="mt-4">Username</label>
+                            <input class="form-control" name="username" id="username" required>
+
+                            <label class="mt-4">Email</label>
+                            <input class="form-control" name="email" id="email" required>
+            
+                            <label class="mt-4">Password</label>
+                            <input class="form-control mb-5" id="password" name="password" type="password" required>
+                            
+                            <button class="btn btn-danger btn-block mt-5" id="signup">Sign Up</button>
+                            <br>
+                            <hr>
+                            <a href="/signin">Signin Instead</a>
+                            </div>
+
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script>
+    $(document).ready(() => {
+        $('#signup').click(() => {
+                const username = $('#username').val()
+                const email = $('#email').val()
+                const password = $('#password').val()
+
+                const formdata = {
+                    username : username,
+                    email : email,
+                    password : password
+                }
+
+                $.ajax({url : '/signup', data : formdata, method : "post", complete : (data) => {
+                    console.log(data);
+                    // sessionStorage.setItem('data', JSON.stringify(data.responseJSON));
+                    if(data.responseJSON == 'success'){
+                        Swal.fire({
+                        icon : 'success',
+                        title: 'Registered Successfully!',
+                        html: 'You may now login to continue',
+                        }).then(() => {
+                            window.location.replace('/signin')
+                        })
+                    }
+                    
+                },
+                beforeSend: () => {
+                    Swal.fire({
+                        title: 'Wait a bit!',
+                        html: 'This may take some time',
+                        timerProgressBar: true,
+                        onBeforeOpen: (
+                            
+                        ) => {
+                            Swal.showLoading();
+                        },
+                        })
+                },
+                })
+            });
+    })
+</script>
+
+{% endblock %}

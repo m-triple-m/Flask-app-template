@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+<style>
+    .header-mg{
+        background: linear-gradient(rgba(4, 5, 110, 0.712), rgba(86, 0, 93, 0.685)),
+            url('static/assets/img/bg-masthead.jpg');
+            background-size:cover;
+            background-position: center;
+            height: 59rem;
+    }
+</style>
+{% endblock %}
+
+
+{% block body %}
+
+
+<header class="masthead text-center header-mg">
+    <div class="overlay"></div>
+    <!-- <div class="container"> -->
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row text-white ">
+              <div class="col-xl-8 mx-auto" style="text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.698)">
+                  <h1 class="h1">Title Here</h1>
+                  <h3 class="mb-5">Project Purpose</h3>
+              </div>
+          </div>
+          </div>
+          <div class="col-md-6">
+            <section class="">
+              <div class="row justify-content-center">
+                  <div class="col-md-8">
+                      <div class="card">
+                          <div class="card-body">
+                              <h1>Title</h1>
+                              <hr>
+                              <p class="h5">sample text</p>
+                              <a href="#" class="btn purple-gradient btn-block mt-5" style="border-radius: 2rem;"">Get Started</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </section>
+          </div>
+        <!-- </div> -->
+    </div>    
+</header>
+
+
+{% endblock %}
+
