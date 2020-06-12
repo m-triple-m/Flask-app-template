@@ -15,8 +15,19 @@ class User(db.Model):
     email = db.Column(db.String(20), nullable = True)
     password = db.Column(db.String(30), nullable = False)
 
-    def __repr__(self):
-        return f'self.username, self.email, self.password'
+class Image(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    name = db.Column(db.String(30), unique = False, nullable = False)
+    path = db.Column(db.String(20), nullable = True)
+    created = db.Column(db.String(30), nullable = False)
+    user = db.Column(db.String(30), nullable = False)
+
+class Result(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    name = db.Column(db.String(30), unique = True, nullable = False)
+    path = db.Column(db.String(20), nullable = True)
+    created = db.Column(db.String(30), nullable = False)
+    user = db.Column(db.String(30), nullable = False)
 
 
 db.create_all()
@@ -65,7 +76,19 @@ def Signup():
 def Logout():
     session['user'] = None
     return redirect('/signin')
+
+
+@app.route('/detect')
+def Detect():
+    return render_template('detect.html')
     
+#detection
+#result
+#saved images
+#previous results
+#image upload
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
